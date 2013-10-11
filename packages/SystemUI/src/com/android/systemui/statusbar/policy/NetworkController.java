@@ -49,6 +49,7 @@ import com.android.internal.telephony.cdma.EriInfo;
 import com.android.internal.util.AsyncChannel;
 import com.android.server.am.BatteryStatsService;
 import com.android.systemui.R;
+import com.android.systemui.statusbar.phone.CarrierLabel; //增加运营商中文化 by cofface
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -1216,6 +1217,8 @@ public class NetworkController extends BroadcastReceiver {
                 mQSDataTypeIconId = R.drawable.ic_qs_signal_r;
             }
         }
+		
+		mobileLabel = CarrierLabel.operatorCheck(mobileLabel);  //增加运营商中文化 by cofface
 
         if (DEBUG) {
             Slog.d(TAG, "refreshViews connected={"

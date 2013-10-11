@@ -93,7 +93,7 @@ public class CarrierLabel extends TextView {
             Slog.d("CarrierLabel", "updateNetworkName showSpn=" + showSpn + " spn=" + spn
                     + " showPlmn=" + showPlmn + " plmn=" + plmn);
         }
-        final String str;
+        String str = "";  //运营商中文化 by cofface
         // match logic in KeyguardStatusViewManager
         final boolean plmnValid = showPlmn && !TextUtils.isEmpty(plmn);
         final boolean spnValid = showSpn && !TextUtils.isEmpty(spn);
@@ -106,7 +106,23 @@ public class CarrierLabel extends TextView {
         } else {
             str = "";
         }
-        setText(str);
+        setText(operatorCheck(str)); //运营商中文化 by cofface
+    }
+	//运营商中文化 by cofface
+	public static String operatorCheck(String CarrierLabelText) {
+        if (CarrierLabelText != null) {
+            String str1 = CarrierLabelText.trim();
+            if (str1.equals("ctnet") || str1.equals("46003"))
+                return "中国电信";
+            else if (str1.equals("China Mobile") || str1.equals("46000") || str1.equals("46002") || str1.equals("46007"))
+                return "中国移动";
+            else if (str1.equals("China Unicom") || str1.equals("46001") || str1.equals("46006") || str1.equals("46020"))
+                return "中国联通";
+            else
+                return str1;
+        } else {
+            return "";
+        }
     }
 
 
