@@ -3189,6 +3189,13 @@ public final class Settings {
         public static final String VOLUME_KEYS_CONTROL_RING_STREAM = "volume_keys_control_ring_stream";
 
         /**
+		* Show traffic stats in status bar or not
+         * 
+         * @hide
+         */
+        public static final String STATUS_BAR_SHOW_TRAFFIC = "status_bar_show_traffic";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
