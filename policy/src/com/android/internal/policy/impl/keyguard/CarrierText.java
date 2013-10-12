@@ -73,13 +73,31 @@ public class CarrierText extends TextView {
     }
 
     protected void updateCarrierText(State simState, CharSequence plmn, CharSequence spn) {
-        CharSequence text = getCarrierTextForSimState(simState, plmn, spn);
+       CharSequence text = getCarrierTextForSimState(simState, plmn, spn);
+        if (text != null) text = operatorCheck(text.toString());
         if (KeyguardViewManager.USE_UPPER_CASE) {
             setText(text != null ? text.toString().toUpperCase() : null);
         } else {
             setText(text);
         }
     }
+	
+	public static String operatorCheck(String CarrierLabelText) {
+        if (CarrierLabelText != null) {
+            String str1 = CarrierLabelText.trim();
+            if (str1.equals("ctnet") || str1.equals("46003"))
+               return "中国电信";
+            else if (str1.equals("China Mobile") || str1.equals("46000") || str1.equals("46002") || str1.equals("46007"))
+                return "中国移动";
+            else if (str1.equals("China Unicom") || str1.equals("46001") || str1.equals("46006") || str1.equals("46020"))
+                return "中国联通";
+            else
+                return str1;
+        } else {
+            return "";
+        }
+    }
+ 
 
     @Override
     protected void onFinishInflate() {
